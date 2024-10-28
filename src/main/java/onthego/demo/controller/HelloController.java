@@ -1,5 +1,6 @@
 package onthego.demo.controller;
 
+import onthego.demo.dto.AlarmRequest;
 import onthego.demo.dto.ScheduleRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -70,4 +71,50 @@ public class HelloController {
         response.put("description3", request.getDescription3());
         return response;
     }
+
+    // 날씨 정보 조회
+    @GetMapping("/weather")
+    public Map<String, Object> getWeather() {
+        Map<String, Object> response = new HashMap<>();
+
+        // 더미 데이터 설정
+        response.put("location", "서울특별시");
+        response.put("temperature", "15.5°C");
+        response.put("humidity", "60%");
+
+        return response;
+    }
+
+    // 의류 정보 조회
+    @GetMapping("/clothes")
+    public Map<String, String> getClothes() {
+        Map<String, String> response = new HashMap<>();
+
+        // 더미 데이터 설정
+        response.put("top", "티셔츠");
+        response.put("bottom", "청바지");
+        response.put("outer", "자켓");
+        response.put("accessories", "모자");
+
+        return response;
+    }
+
+    @GetMapping("/preparation")
+    public Map<String, String>  getPreparationItem() {
+        Map<String, String> response = new HashMap<>();
+        response.put("result", "마스크");
+        // 단일 준비물 응답 설정
+        return response;
+    }
+
+    @PostMapping("/alarm")
+    public Map<String, String> setAlarm(@RequestBody AlarmRequest request) {
+        Map<String, String> response = new HashMap<>();
+
+        // 요청 받은 알람 시간 설정
+        response.put("alarmTime", request.getAlarmTime());
+
+        return response;
+    }
+
 }
