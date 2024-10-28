@@ -1,14 +1,19 @@
 package onthego.demo.controller;
 
-import onthego.demo.dto.AlarmRequest;
-import onthego.demo.dto.ScheduleRequest;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import onthego.demo.dto.AlarmRequest;
+import onthego.demo.dto.ScheduleRequest;
 
 @RestController
 @RequestMapping("/")
@@ -52,10 +57,10 @@ public class HelloController {
 
         // 더미 데이터 설정
         response.put("date", date);
-        response.put("location", "경기도 안양시");
-        response.put("description1", "요리하기");
-        response.put("description2", "빨래개기");
-        response.put("description3", "화장하기");
+        response.put("location", "홍라드");
+        response.put("description1", "사진 촬영");
+        response.put("description2", "카페 탐방");
+        response.put("description3", "쇼핑");
 
         return response;
     }
@@ -78,9 +83,9 @@ public class HelloController {
         Map<String, Object> response = new HashMap<>();
 
         // 더미 데이터 설정
-        response.put("location", "서울특별시");
-        response.put("temperature", "15.5°C");
-        response.put("humidity", "60%");
+        response.put("location", "경기도 안양시");
+        response.put("temperature", "15.86°C");
+        response.put("humidity", "67%");
 
         return response;
     }
@@ -100,7 +105,7 @@ public class HelloController {
     }
 
     @GetMapping("/preparation")
-    public Map<String, String>  getPreparationItem() {
+    public Map<String, String> getPreparationItem() {
         Map<String, String> response = new HashMap<>();
         response.put("result", "마스크");
         // 단일 준비물 응답 설정
