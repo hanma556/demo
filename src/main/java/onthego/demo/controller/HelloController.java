@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,6 +23,8 @@ import onthego.demo.service.ClothingRecommendationService;
 import onthego.demo.service.ScheduleService;
 import onthego.demo.entity.Schedule;
 import java.util.List;
+import onthego.demo.service.AlarmService;
+import onthego.demo.entity.Alarm;
 
 
 @RestController
@@ -30,6 +34,8 @@ public class HelloController {
 
     private final ClothingRecommendationService clothesService;
     private final ScheduleService scheduleService;
+    private final AlarmService alarmService;
+
     // 위치 허용 처리
     @PostMapping("/permissions/location/allow")
     public ResponseEntity<String> allowLocation() {
@@ -112,14 +118,29 @@ public class HelloController {
     // return response;
     // }
 
+    // 알람 생성
     @PostMapping("/alarm")
-    public Map<String, String> setAlarm(@RequestBody AlarmRequest request) {
-        Map<String, String> response = new HashMap<>();
-
-        // 요청 받은 알람 시간 설정
-        response.put("alarmTime", request.getAlarmTime());
-
-        return response;
+    public ResponseEntity<Alarm> createAlarm(@RequestBody AlarmRequest request) {
+        Alarm savedAlarm = alarmService.createAlarm(request);
+        return ResponseEntity.ok(savedAlarm);
     }
+
+    // 알람 수정
+    @PutMapping("/alarm/{id}")
+    public ResponseEntity<Alarm> updateAlarm(
+            @PathVariable Long id,
+            @RequestBody AlarmRequest request) {
+        Alarm updatedAlarm = alarmService.updateAlarm(id, request);
+        return ResponseEntity.ok(updatedAlarm);
+    }
+
+    // 첫번째 알람 조회
+    @GetMapping("/alarm")
+    public ResponseEntity<Alarm> getFirstAlarm() {
+        Alarm alarm = alarmService.getFirstAlarm();
+        return ResponseEntity.ok(alarm);
+    }
+
+
 
 }
