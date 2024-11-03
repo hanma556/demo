@@ -25,6 +25,9 @@ import onthego.demo.entity.Schedule;
 import java.util.List;
 import onthego.demo.service.AlarmService;
 import onthego.demo.entity.Alarm;
+import onthego.demo.service.UserInfoService;
+import onthego.demo.entity.UserInfo;
+import onthego.demo.dto.UserInfoRequest;
 
 
 @RestController
@@ -35,34 +38,7 @@ public class HelloController {
     private final ClothingRecommendationService clothesService;
     private final ScheduleService scheduleService;
     private final AlarmService alarmService;
-
-    // 위치 허용 처리
-    @PostMapping("/permissions/location/allow")
-    public ResponseEntity<String> allowLocation() {
-        // 위치 허용 로직 추가
-        return ResponseEntity.ok("위치 허용됨.");
-    }
-
-    // 위치 거부 처리
-    @PostMapping("/permissions/location/deny")
-    public ResponseEntity<String> denyLocation() {
-        // 거부 시 휴대폰 설정 어플로 안내하는 로직 추가
-        return ResponseEntity.ok("위치 권한이 거부되었습니다. 설정에서 허용해주세요.");
-    }
-
-    // 알람 허용 처리
-    @PostMapping("/permissions/alarm/allow")
-    public ResponseEntity<String> allowAlarm() {
-        // 알람 허용 로직 추가
-        return ResponseEntity.ok("알람 허용됨.");
-    }
-
-    // 알람 거부 처리
-    @PostMapping("/permissions/alarm/deny")
-    public ResponseEntity<String> denyAlarm() {
-        // 거부 시 휴대폰 설정 어플로 안내하는 로직 추가
-        return ResponseEntity.ok("알람 권한이 거부되었습니다. 설정에서 허용해주세요.");
-    }
+    private final UserInfoService userInfoService;
 
     @GetMapping("/schedule")
     public ResponseEntity<List<Schedule>> getAllSchedules() {
@@ -141,6 +117,17 @@ public class HelloController {
         return ResponseEntity.ok(alarm);
     }
 
+    @GetMapping("/user-info")
+    public ResponseEntity<UserInfo> getUserInfo() {
+        UserInfo userInfo = userInfoService.getUserInfo();
+        return ResponseEntity.ok(userInfo);
+    }
 
+    // 위치 알림 정보 수정
+    @PutMapping("/user-info")
+    public ResponseEntity<UserInfo> updateUserInfo(@RequestBody UserInfoRequest request) {
+        UserInfo updatedUserInfo = userInfoService.updateUserInfo(request);
+        return ResponseEntity.ok(updatedUserInfo);
+    }
 
 }
