@@ -12,13 +12,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import lombok.RequiredArgsConstructor;
 import onthego.demo.dto.AlarmRequest;
+import onthego.demo.dto.ClothesResponse;
 import onthego.demo.dto.ScheduleRequest;
 import onthego.demo.dto.WeatherRequest;
+import onthego.demo.service.ClothingRecommendationService;
 
 @RestController
 @RequestMapping("/")
+@RequiredArgsConstructor
 public class HelloController {
+
+    private final ClothingRecommendationService clothesService;
 
     // 위치 허용 처리
     @PostMapping("/permissions/location/allow")
@@ -107,17 +113,8 @@ public class HelloController {
 
     // 날씨에 따른 옷, 물품 정보 내려보내줌
     @PostMapping("/clothes")
-    public Map<String, String> Clothes(@RequestBody WeatherRequest request) {
-        Map<String, String> response = new HashMap<>();
-
-        // 더미 데이터 설정
-        response.put("top", "티셔츠");
-        response.put("bottom", "청바지");
-        response.put("outer", "자켓");
-        response.put("accessories", "모자");
-        response.put("result", "마스크");
-
-        return response;
+    public ClothesResponse Clothes(@RequestBody WeatherRequest request) {
+        return clothesService.getRecommendedClothes(request);
     }
 
     // @GetMapping("/preparation")
