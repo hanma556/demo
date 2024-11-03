@@ -18,6 +18,10 @@ import onthego.demo.dto.ClothesResponse;
 import onthego.demo.dto.ScheduleRequest;
 import onthego.demo.dto.WeatherRequest;
 import onthego.demo.service.ClothingRecommendationService;
+import onthego.demo.service.ScheduleService;
+import onthego.demo.entity.Schedule;
+
+
 
 @RestController
 @RequestMapping("/")
@@ -25,7 +29,7 @@ import onthego.demo.service.ClothingRecommendationService;
 public class HelloController {
 
     private final ClothingRecommendationService clothesService;
-
+    private final ScheduleService scheduleService;
     // 위치 허용 처리
     @PostMapping("/permissions/location/allow")
     public ResponseEntity<String> allowLocation() {
@@ -74,14 +78,9 @@ public class HelloController {
 
     // 일정 추가
     @PostMapping("/schedule")
-    public Map<String, String> createSchedule(@RequestBody ScheduleRequest request) {
-        Map<String, String> response = new HashMap<>();
-        response.put("date", request.getDate());
-        response.put("location", request.getLocation());
-        response.put("description1", request.getDescription1());
-        response.put("description2", request.getDescription2());
-        response.put("description3", request.getDescription3());
-        return response;
+    public ResponseEntity<Schedule> createSchedule(@RequestBody ScheduleRequest request) {
+        Schedule savedSchedule = scheduleService.createSchedule(request);
+        return ResponseEntity.ok(savedSchedule);
     }
 
     // 날씨 정보 조회
