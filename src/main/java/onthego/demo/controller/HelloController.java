@@ -20,7 +20,7 @@ import onthego.demo.dto.WeatherRequest;
 import onthego.demo.service.ClothingRecommendationService;
 import onthego.demo.service.ScheduleService;
 import onthego.demo.entity.Schedule;
-
+import java.util.List;
 
 
 @RestController
@@ -59,21 +59,9 @@ public class HelloController {
     }
 
     @GetMapping("/schedule")
-    public Map<String, String> getSchedule() {
-        Map<String, String> response = new HashMap<>();
-
-        // 날짜 및 시간 형식 지정
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        String date = LocalDateTime.of(2024, 1, 26, 12, 0, 0).format(formatter);
-
-        // 더미 데이터 설정
-        response.put("date", date);
-        response.put("location", "홍라드");
-        response.put("description1", "사진 촬영");
-        response.put("description2", "카페 탐방");
-        response.put("description3", "쇼핑");
-
-        return response;
+    public ResponseEntity<List<Schedule>> getAllSchedules() {
+         List<Schedule> schedules = scheduleService.getAllSchedules();
+        return ResponseEntity.ok(schedules);
     }
 
     // 일정 추가

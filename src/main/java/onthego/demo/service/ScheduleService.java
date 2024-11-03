@@ -6,7 +6,9 @@ import onthego.demo.entity.Schedule;
 import onthego.demo.repository.ScheduleRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import java.util.List;
 import java.time.LocalDateTime;
+
 @Service
 @RequiredArgsConstructor
 public class ScheduleService {
@@ -24,4 +26,10 @@ public class ScheduleService {
         
         return scheduleRepository.save(schedule);
     }
+
+    @Transactional(readOnly = true)
+    public List<Schedule> getAllSchedules() {
+        return scheduleRepository.findAll();
+    }
+
 }
