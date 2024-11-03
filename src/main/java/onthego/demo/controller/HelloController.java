@@ -33,6 +33,7 @@ import onthego.demo.dto.UserInfoRequest;
 @RestController
 @RequestMapping("/")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*", allowedHeaders = "*") 
 public class HelloController {
 
     private final ClothingRecommendationService clothesService;
