@@ -19,33 +19,63 @@ public class ClothingRecommendationService {
         String preparation = "";
 
         // 날씨와 기온에 따라 의류 추천 로직
-        if (temperature >= 30) {
-            top = "반팔 티셔츠";
+        if (temperature >= 28) {
+            top = "민소매";
+            bottom = "숏팬츠";
+            outer = "없음";
+            accessories = "샌들";
+            preparation = "양산";
+        } else if (temperature <= 27 && temperature >= 23) {
+            top = "반팔";
             bottom = "반바지";
             outer = "없음";
-            accessories = "모자";
-        } else if (temperature >= 20) {
-            top = "티셔츠";
+            accessories = "샌들";
+            preparation = "부채";
+        } else if (temperature <= 22 && temperature >= 20) {
+            top = "셔츠";
+            bottom = "슬랙스";
+            outer = "얇은 가디건";
+            accessories = "운동화";
+            preparation = "손수건";
+        } else if (temperature <= 19 && temperature >= 17) {
+            top = "후드";
+            bottom = "청바지";
+            outer = "바람막이";
+            accessories = "운동화";
+            preparation = "스카프";
+        } else if (temperature <= 16 && temperature >= 12) {
+            top = "니트";
             bottom = "청바지";
             outer = "가디건";
-            accessories = "선글라스";
-        } else if (temperature >= 10) {
-            top = "긴팔 티셔츠";
-            bottom = "슬랙스";
-            outer = "자켓";
-            accessories = "목도리";
+            accessories = "스니커즈";
+            preparation = "마스크";
+        } else if (temperature <= 11 && temperature >= 9) {
+            top = "니트";
+            bottom = "기모바지";
+            outer = "트렌치코트";
+            accessories = "비니";
+            preparation = "담요";
+        } else if (temperature <= 8 && temperature >= 5) {
+            top = "기모 후드";
+            bottom = "기모바지";
+            outer = "코트";
+            accessories = "어그 부츠";
+            preparation = "핸드크림";
         } else {
-            top = "두꺼운 스웨터";
-            bottom = "따뜻한 바지";
+            top = "기모 후드";
+            bottom = "기모바지";
             outer = "패딩";
-            accessories = "장갑";
+            accessories = "목도리";
+            preparation = "핫팩";
         }
 
         // 날씨에 따라 추가 조정
         if (weather.contains("비")) {
-            outer += " (우산 필수)";
+            top += ", 우비";
+            preparation += ", 우산";
         } else if (weather.contains("눈")) {
-            outer += " (눈에 맞는 옷)";
+
+            preparation += ", 보온병";
         }
 
         return new ClothesResponse(top, bottom, outer, accessories, preparation);
