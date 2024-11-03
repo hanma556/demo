@@ -71,8 +71,7 @@ public class ClothingRecommendationService {
 
         // 날씨에 따라 추가 조정
         if (weather.contains("비")) {
-            top += ", 우비";
-            preparation += ", 우산";
+            preparation += ", 우비, 우산";
         } else if (weather.contains("눈")) {
 
             preparation += ", 보온병";
