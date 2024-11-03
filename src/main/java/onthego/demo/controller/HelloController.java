@@ -1,16 +1,16 @@
 package onthego.demo.controller;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,22 +18,20 @@ import lombok.RequiredArgsConstructor;
 import onthego.demo.dto.AlarmRequest;
 import onthego.demo.dto.ClothesResponse;
 import onthego.demo.dto.ScheduleRequest;
+import onthego.demo.dto.UserInfoRequest;
 import onthego.demo.dto.WeatherRequest;
+import onthego.demo.entity.Alarm;
+import onthego.demo.entity.Schedule;
+import onthego.demo.entity.UserInfo;
+import onthego.demo.service.AlarmService;
 import onthego.demo.service.ClothingRecommendationService;
 import onthego.demo.service.ScheduleService;
-import onthego.demo.entity.Schedule;
-import java.util.List;
-import onthego.demo.service.AlarmService;
-import onthego.demo.entity.Alarm;
 import onthego.demo.service.UserInfoService;
-import onthego.demo.entity.UserInfo;
-import onthego.demo.dto.UserInfoRequest;
-
 
 @RestController
 @RequestMapping("/")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "*", allowedHeaders = "*") 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class HelloController {
 
     private final ClothingRecommendationService clothesService;
@@ -43,7 +41,7 @@ public class HelloController {
 
     @GetMapping("/schedule")
     public ResponseEntity<List<Schedule>> getAllSchedules() {
-         List<Schedule> schedules = scheduleService.getAllSchedules();
+        List<Schedule> schedules = scheduleService.getAllSchedules();
         return ResponseEntity.ok(schedules);
     }
 
