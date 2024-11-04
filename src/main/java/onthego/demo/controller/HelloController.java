@@ -1,8 +1,6 @@
 package onthego.demo.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -52,18 +50,18 @@ public class HelloController {
         return ResponseEntity.ok(savedSchedule);
     }
 
-    // 날씨 정보 조회
-    @GetMapping("/weather")
-    public Map<String, Object> getWeather() {
-        Map<String, Object> response = new HashMap<>();
+    // // 날씨 정보 조회
+    // //@GetMapping("/weather")
+    // //public Map<String, Object> getWeather() {
+    // Map<String, Object> response = new HashMap<>();
 
-        // 더미 데이터 설정
-        response.put("location", "경기도 안양시");
-        response.put("temperature", "15.86°C");
-        response.put("humidity", "67%");
+    // // 더미 데이터 설정
+    // response.put("location", "경기도 안양시");
+    // response.put("temperature", "15.86°C");
+    // response.put("humidity", "67%");
 
-        return response;
-    }
+    // return response;
+    // }
 
     // 의류 정보 조회
     // @GetMapping("/clothes")
