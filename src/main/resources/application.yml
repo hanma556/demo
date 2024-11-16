@@ -3,6 +3,9 @@ server:
 spring:
     datasource:
         driver-class-name: org.postgresql.Driver
+        url: jdbc:postgresql://onthego-database.cozyauqorjce.ap-northeast-2.rds.amazonaws.com:5432/postgres
+        username: postgres
+        password: alsdud1~~
 
     jpa:
         database: postgresql
